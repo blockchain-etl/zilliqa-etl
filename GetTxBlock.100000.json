@@ -1,0 +1,48 @@
+{
+    "id": "1",
+    "jsonrpc": "2.0",
+    "result": {
+        "body": {
+            "BlockHash": "f5f5076ee967b515d9d63ee89b37b8185eb42724ba69c5af29d62752751fe7ad",
+            "HeaderSign": "D76B9301D86B5848011EBCC4B1F10BE5BE7A74B9559688EF0A2309591BF612F3C62242866A9876E1097C9744D2896FAE750CCDE38F1E8CBA83550006F1B2D7DC",
+            "MicroBlockInfos": [
+                {
+                    "MicroBlockHash": "4b6bc545258f607e72eece324d24c8882599c491f838321db8b4a5f74b760353",
+                    "MicroBlockShardId": 0,
+                    "MicroBlockTxnRootHash": "0000000000000000000000000000000000000000000000000000000000000000"
+                },
+                {
+                    "MicroBlockHash": "6ac53760e70e62f53439db14c7af3ec485d1bc83f88c85f37dd52d5ba6a91e8c",
+                    "MicroBlockShardId": 1,
+                    "MicroBlockTxnRootHash": "0000000000000000000000000000000000000000000000000000000000000000"
+                },
+                {
+                    "MicroBlockHash": "de785c6f57ca9ca1e077dd4879fa2c2663c5873da0f432b1fa55f29bb504f8a4",
+                    "MicroBlockShardId": 2,
+                    "MicroBlockTxnRootHash": "0000000000000000000000000000000000000000000000000000000000000000"
+                },
+                {
+                    "MicroBlockHash": "3daac82d4c368b58eb3104978959f62dee73774900a8e4fefe8338dff5bfc5e9",
+                    "MicroBlockShardId": 3,
+                    "MicroBlockTxnRootHash": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+            ]
+        },
+        "header": {
+            "BlockNum": "100000",
+            "DSBlockNum": "1001",
+            "GasLimit": "2000000",
+            "GasUsed": "0",
+            "MbInfoHash": "43a6c8ebe760a0e0faddc3d0b02e66f44c10d35105ed4c239f2e4c6888e75fdf",
+            "MinerPubKey": "0x0249D827AA8227AE3C4D971365A1FD97F7E6770243DA77D964BE029E3BD97896F8",
+            "NumMicroBlocks": 4,
+            "NumTxns": 0,
+            "PrevBlockHash": "427b06b88e45990a9ec0fc2e034e044294a0496e6d34a001e3435f4379f6c677",
+            "Rewards": "0",
+            "StateDeltaHash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "StateRootHash": "641df39c0b4dcd838a30a51a48c7c3e7abaee91887da84b7c58bc77b26984aaf",
+            "Timestamp": "1557543335577171",
+            "Version": 1
+        }
+    }
+}

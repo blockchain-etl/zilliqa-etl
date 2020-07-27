@@ -1,0 +1,23 @@
+{
+    "id": "1",
+    "jsonrpc": "2.0",
+    "result": {
+        "CurrentDSEpoch": "6924",
+        "CurrentMiniEpoch": "692354",
+        "DSBlockRate": 0.00014755376222244505,
+        "NumDSBlocks": "6925",
+        "NumPeers": 1800,
+        "NumTransactions": "5996754",
+        "NumTxBlocks": "692354",
+        "NumTxnsDSEpoch": "2792",
+        "NumTxnsTxEpoch": "24",
+        "ShardingStructure": {
+            "NumPeers": [
+                600,
+                600
+            ]
+        },
+        "TransactionRate": 0.57396543030128522,
+        "TxBlockRate": 0.014751504521175376
+    }
+}
