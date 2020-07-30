@@ -75,6 +75,7 @@ params: STRUCT (REPEATED)
 block_number: INTEGER
 timestamp: TIMESTAMP
 transaction_id: STRING
+index: INTEGER
 addr: STRING
 depth: INTEGER
 amount: NUMERIC
