@@ -40,6 +40,7 @@ id: STRING
 block_number: INTEGER
 timestamp: TIMESTAMP
 amount: NUMERIC
+code: STRING
 data: STRING
 gas_limit: NUMERIC
 gas_price: NUMERIC
@@ -48,8 +49,8 @@ sender_pub_key: STRING
 signature: STRING
 to_addr: STRING
 version: INTEGER
-accepted: INTEGER
-success: INTEGER
+accepted: BOOL
+success: BOOL
 cumulative_gas: NUMERIC
 epoch_num: INTEGER
 ```
@@ -69,6 +70,17 @@ params: STRUCT (REPEATED)
 ├── vname: STRING
 ```
 
+### exceptions
+
+```
+block_number: INTEGER
+timestamp: TIMESTAMP
+transaction_id: STRING
+index: INTEGER
+line: INTEGER
+message: STRING
+```
+
 ### transitions
 
 ```
@@ -76,9 +88,14 @@ block_number: INTEGER
 timestamp: TIMESTAMP
 transaction_id: STRING
 index: INTEGER
+accepted: BOOL
 addr: STRING
 depth: INTEGER
 amount: NUMERIC
 recipient: STRING
 tag: STRING
+params: STRUCT (REPEATED)
+├── type: STRING
+├── value: STRING
+├── vname: STRING
 ```
