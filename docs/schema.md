@@ -64,10 +64,7 @@ transaction_id: STRING
 index: INTEGER
 address: STRING
 event_name: STRING
-params: STRUCT (REPEATED)
-├── type: STRING
-├── value: STRING
-├── vname: STRING
+params: STRING (REPEATED)
 ```
 
 ### exceptions
@@ -94,8 +91,5 @@ depth: INTEGER
 amount: NUMERIC
 recipient: STRING
 tag: STRING
-params: STRUCT (REPEATED)
-├── type: STRING
-├── value: STRING
-├── vname: STRING
+params: STRING (REPEATED)
 ```
