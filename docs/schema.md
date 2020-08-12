@@ -7,7 +7,7 @@ timestamp: TIMESTAMP
 difficulty: INTEGER
 difficulty_ds: INTEGER
 gas_price: NUMERIC
-leader_pub_key: STRING
+ds_leader_pub_key: STRING
 prev_hash: STRING
 signature: STRING
 ```
@@ -23,7 +23,7 @@ version: INTEGER
 gas_limit: NUMERIC
 gas_used: NUMERIC
 mb_info_hash: STRING
-miner_pub_key: STRING
+tx_leader_pub_key: STRING
 num_micro_blocks: INTEGER
 num_transactions: INTEGER
 prev_block_hash: STRING
@@ -38,7 +38,7 @@ header_signature: STRING
 ```
 id: STRING
 block_number: INTEGER
-timestamp: TIMESTAMP
+block_timestamp: TIMESTAMP
 amount: NUMERIC
 code: STRING
 data: STRING
@@ -59,7 +59,7 @@ epoch_num: INTEGER
 
 ```
 block_number: INTEGER
-timestamp: TIMESTAMP
+block_timestamp: TIMESTAMP
 transaction_id: STRING
 index: INTEGER
 address: STRING
@@ -74,7 +74,7 @@ params: STRUCT (REPEATED)
 
 ```
 block_number: INTEGER
-timestamp: TIMESTAMP
+block_timestamp: TIMESTAMP
 transaction_id: STRING
 index: INTEGER
 line: INTEGER
@@ -85,7 +85,7 @@ message: STRING
 
 ```
 block_number: INTEGER
-timestamp: TIMESTAMP
+block_timestamp: TIMESTAMP
 transaction_id: STRING
 index: INTEGER
 accepted: BOOL
