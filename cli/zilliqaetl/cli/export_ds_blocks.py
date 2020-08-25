@@ -49,7 +49,7 @@ def export_ds_blocks(start_block, end_block, provider_uri, max_workers, batch_si
     job = ExportDsBlocksJob(
         start_block=start_block,
         end_block=end_block,
-        zilliqa_rpc=ThreadLocalProxy(lambda: ZilliqaAPI(provider_uri)),
+        zilliqa_api=ThreadLocalProxy(lambda: ZilliqaAPI(provider_uri)),
         max_workers=max_workers,
         item_exporter=ZilliqaItemExporter(output_dir, output_format=output_format),
         batch_size=batch_size

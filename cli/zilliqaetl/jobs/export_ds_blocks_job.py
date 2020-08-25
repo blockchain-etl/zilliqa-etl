@@ -33,7 +33,7 @@ class ExportDsBlocksJob(BaseJob):
             self,
             start_block,
             end_block,
-            zilliqa_rpc,
+            zilliqa_api,
             max_workers,
             item_exporter,
             batch_size=1):
@@ -44,7 +44,7 @@ class ExportDsBlocksJob(BaseJob):
         self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
         self.item_exporter = item_exporter
 
-        self.zilliqa_service = ZilliqaService(zilliqa_rpc)
+        self.zilliqa_service = ZilliqaService(zilliqa_api)
 
     def _start(self):
         self.item_exporter.open()

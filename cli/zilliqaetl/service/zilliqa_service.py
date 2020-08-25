@@ -22,11 +22,11 @@
 
 
 class ZilliqaService(object):
-    def __init__(self, zilliqa_rpc):
-        self.zilliqa_rpc = zilliqa_rpc
+    def __init__(self, zilliqa_api):
+        self.zilliqa_api = zilliqa_api
 
     def get_ds_block(self, block_number):
-        block = self.zilliqa_rpc.GetDsBlock(str(block_number))
+        block = self.zilliqa_api.GetDsBlock(str(block_number))
         return block
 
     def get_ds_blocks(self, block_number_batch):

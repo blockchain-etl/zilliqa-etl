@@ -24,7 +24,7 @@ import pytest
 
 from zilliqaetl.jobs.export_ds_blocks_job import ExportDsBlocksJob
 from zilliqaetl.exporters.zilliqa_item_exporter import ZilliqaItemExporter
-from tests.zilliqaetl.helpers import get_zilliqa_rpc
+from tests.zilliqaetl.helpers import get_zilliqa_api
 from blockchainetl_common.thread_local_proxy import ThreadLocalProxy
 
 import tests.resources
@@ -45,8 +45,8 @@ def test_export_ds_blocks_job(tmpdir, start_block, end_block, resource_group, pr
     job = ExportDsBlocksJob(
         start_block=start_block,
         end_block=end_block,
-        zilliqa_rpc=ThreadLocalProxy(
-            lambda: get_zilliqa_rpc(
+        zilliqa_api=ThreadLocalProxy(
+            lambda: get_zilliqa_api(
                 provider_type,
                 read_resource_lambda=lambda file: read_resource(resource_group, file))),
         max_workers=5,
