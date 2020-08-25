@@ -23,6 +23,7 @@
 import click
 
 from zilliqaetl.cli.export_ds_blocks import export_ds_blocks
+from zilliqaetl.cli.export_tx_blocks import export_tx_blocks
 
 
 @click.group()
@@ -34,3 +35,4 @@ def cli(ctx):
 
 # export
 cli.add_command(export_ds_blocks, "export_ds_blocks")
+cli.add_command(export_tx_blocks, "export_tx_blocks")

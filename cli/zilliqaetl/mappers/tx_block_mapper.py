@@ -20,27 +20,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import decimal
-import json
+from zilliqaetl.utils.zilliqa_utils import to_int
 
 
-class MockZilliqaAPI:
-    def __init__(self, read_resource):
-        self.read_resource = read_resource
+def map_tx_block(raw_block):
+    header = raw_block.get('header')
+    body = raw_block.get('body')
+    block = {
+        'type': 'tx_block',
+        'number': to_int(header.get('BlockNum')),
+        'ds_block_number': to_int(header.get('DSBlockNum')),
+        'timestamp': header.get('Timestamp'),
+        'version': header.get('Version'),
+        'gas_limit': to_int(header.get('GasLimit')),
+        'gas_used': to_int(header.get('GasUsed')),
+        'mb_info_hash': header.get('MbInfoHash'),
+        'tx_leader_pub_key': header.get('MinerPubKey'),
+        'num_micro_blocks': to_int(header.get('NumMicroBlocks')),
+        'num_transactions': to_int(header.get('NumTxns')),
+        'prev_block_hash': header.get('PrevBlockHash'),
+        'rewards': to_int(header.get('Rewards')),
+        'state_delta_hash': header.get('StateDeltaHash'),
+        'state_root_hash': header.get('StateRootHash'),
+        'header_signature': body.get('HeaderSign')
+    }
 
-    def GetDsBlock(self, block_number):
-        file_content = self.read_resource(build_file_name('get_ds_blocks', block_number))
-        return json.loads(file_content).get('result')
-
-    def GetTxBlock(self, block_number):
-        file_content = self.read_resource(build_file_name('get_tx_blocks', block_number))
-        return json.loads(file_content).get('result')
-
-
-def build_file_name(method, *args):
-    return 'mock_{method}{args}.json'.format(method=method,
-                                              args='_' + '_'.join([str(arg) for arg in args]) if len(args) > 0 else '')
-
-
-def json_loads(s):
-    return json.loads(s, parse_float=decimal.Decimal)
+    return block
