@@ -34,3 +34,13 @@ class ZilliqaService(object):
             return []
         for block_number in block_number_batch:
             yield self.get_ds_block(block_number)
+
+    def get_tx_block(self, block_number):
+        block = self.zilliqa_api.GetTxBlock(str(block_number))
+        return block
+
+    def get_tx_blocks(self, block_number_batch):
+        if not block_number_batch:
+            return []
+        for block_number in block_number_batch:
+            yield self.get_tx_block(block_number)

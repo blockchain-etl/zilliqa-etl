@@ -1,0 +1,48 @@
+{
+   "jsonrpc" : "2.0",
+   "id" : "1",
+   "result" : {
+      "body" : {
+         "HeaderSign" : "69A6F3BC6354C73B31D535643FA870B3D3C746594A8EB401EB5AADF94CC6D64599710BBA5CBC17F59922763F696E876A29F4939ADAD13FB572BA1E3A03F8FA26",
+         "BlockHash" : "fd178543098ce52f8bf83693aa46fe651c130d380c77ffb6b50fc66df87b7bb4",
+         "MicroBlockInfos" : [
+            {
+               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000",
+               "MicroBlockShardId" : 0,
+               "MicroBlockHash" : "480d381e67c22c03e4e6a0fb3b393aadcdd7723e19f5691a521bf2757aaa0507"
+            },
+            {
+               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000",
+               "MicroBlockShardId" : 1,
+               "MicroBlockHash" : "d0070bcc09356c048e6ba2034d5cdb0be19551aa2358f8512e907e8c00a21aad"
+            },
+            {
+               "MicroBlockHash" : "57fd1812c89522815f3733b9e03b27795e88d128d15c46806855aa7f69751fbf",
+               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000",
+               "MicroBlockShardId" : 2
+            },
+            {
+               "MicroBlockHash" : "60ba85603a7a92b19796a10fc08da51302d9f73204b2b8ee3d44fa3019378dbb",
+               "MicroBlockShardId" : 3,
+               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000"
+            }
+         ]
+      },
+      "header" : {
+         "GasLimit" : "2000000",
+         "StateRootHash" : "dae2778ec7c58931822970585eacd3fe41f9cf44c7903ccad63d447fcd58f2d1",
+         "Version" : 1,
+         "Rewards" : "0",
+         "BlockNum" : "1003",
+         "Timestamp" : "1549024467402723",
+         "PrevBlockHash" : "8e9f7bdcf084ddf5543fd4ea7201c22cdc5dc7d0ef1910d8c4ec7a52871ff57b",
+         "GasUsed" : "0",
+         "NumTxns" : 0,
+         "MbInfoHash" : "d164fb9cc4adbcd687400a7ae409bdb64a186f68f971d3f046956e9d73485838",
+         "StateDeltaHash" : "0000000000000000000000000000000000000000000000000000000000000000",
+         "DSBlockNum" : "11",
+         "NumMicroBlocks" : 4,
+         "MinerPubKey" : "0x0271685ADA238E7037C2C92F33BEDB43680E933EB2B224B419136E68DEA523359F"
+      }
+   }
+}
