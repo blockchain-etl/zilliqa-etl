@@ -20,28 +20,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps
 
-class ZilliqaService(object):
-    def __init__(self, zilliqa_api):
-        self.zilliqa_api = zilliqa_api
 
-    def get_ds_block(self, block_number):
-        return self.zilliqa_api.GetDsBlock(str(block_number))
-
-    def get_ds_blocks(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        for block_number in block_number_batch:
-            yield self.get_ds_block(block_number)
-
-    def get_tx_block(self, block_number):
-        return self.zilliqa_api.GetTxBlock(str(block_number))
-
-    def get_tx_blocks(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        for block_number in block_number_batch:
-            yield self.get_tx_block(block_number)
-
-    def get_transactions(self, block_number):
-        return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
+def map_transitions(tx_block, txn):
+    receipt = txn.get('receipt')
+    if receipt and receipt.get('transitions'):
+        for index, transition in enumerate(receipt.get('transitions')):
+            msg = transition.get('msg')
+            yield {
+                'type': 'transition',
+                'block_number': tx_block.get('number'),
+                'block_timestamp': tx_block.get('timestamp'),
+                'transaction_id': txn.get('ID'),
+                'index': index,
+                'accepted': receipt.get('accepted'),
+                'addr': transition.get('addr'),
+                'depth': transition.get('depth'),
+                'amount': to_int(msg.get('amount')),
+                'recipient': msg.get('_recipient'),
+                'tag': msg.get('_tag'),
+                'params': json_dumps(msg.get('params')),
+            }

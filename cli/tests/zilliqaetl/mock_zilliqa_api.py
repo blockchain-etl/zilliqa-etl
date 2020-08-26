@@ -29,16 +29,20 @@ class MockZilliqaAPI:
         self.read_resource = read_resource
 
     def GetDsBlock(self, block_number):
-        file_content = self.read_resource(build_file_name('get_ds_blocks', block_number))
+        file_content = self.read_resource(build_file_name('GetDsBlock', block_number))
         return json.loads(file_content).get('result')
 
     def GetTxBlock(self, block_number):
-        file_content = self.read_resource(build_file_name('get_tx_blocks', block_number))
+        file_content = self.read_resource(build_file_name('GetTxBlock', block_number))
+        return json.loads(file_content).get('result')
+
+    def GetTxnBodiesForTxBlock(self, block_number):
+        file_content = self.read_resource(build_file_name('GetTxnBodiesForTxBlock', block_number))
         return json.loads(file_content).get('result')
 
 
 def build_file_name(method, *args):
-    return 'mock_{method}{args}.json'.format(method=method,
+    return 'response_{method}{args}.json'.format(method=method,
                                               args='_' + '_'.join([str(arg) for arg in args]) if len(args) > 0 else '')
 
 

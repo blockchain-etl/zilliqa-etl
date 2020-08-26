@@ -20,28 +20,39 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from zilliqaetl.utils.zilliqa_utils import to_int
 
-class ZilliqaService(object):
-    def __init__(self, zilliqa_api):
-        self.zilliqa_api = zilliqa_api
 
-    def get_ds_block(self, block_number):
-        return self.zilliqa_api.GetDsBlock(str(block_number))
+def map_transaction(tx_block, txn):
+    block = {
+        'type': 'transaction',
+        'id': txn.get('ID'),
+        'block_number': tx_block.get('number'),
+        'block_timestamp': tx_block.get('timestamp'),
+        'amount': to_int(txn.get('amount')),
+        'code': txn.get('code'),
+        'data': txn.get('data'),
+        'gas_limit': to_int(txn.get('gasLimit')),
+        'gas_price': to_int(txn.get('gasPrice')),
+        'nonce': to_int(txn.get('nonce')),
+        'sender_pub_key': txn.get('senderPubKey'),
+        'signature': txn.get('signature'),
+        'to_addr': txn.get('toAddr'),
+        'version': to_int(txn.get('version')),
+        **map_receipt(txn)
+    }
 
-    def get_ds_blocks(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        for block_number in block_number_batch:
-            yield self.get_ds_block(block_number)
+    return block
 
-    def get_tx_block(self, block_number):
-        return self.zilliqa_api.GetTxBlock(str(block_number))
 
-    def get_tx_blocks(self, block_number_batch):
-        if not block_number_batch:
-            return []
-        for block_number in block_number_batch:
-            yield self.get_tx_block(block_number)
+def map_receipt(txn):
+    receipt = txn.get('receipt')
+    if receipt is None:
+        return None
 
-    def get_transactions(self, block_number):
-        return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
+    return {
+        'accepted': receipt.get('accepted'),
+        'success': receipt.get('success'),
+        'cumulative_gas': to_int(receipt.get('cumulative_gas')),
+        'epoch_num': to_int(receipt.get('epoch_num')),
+    }

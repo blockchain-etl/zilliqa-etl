@@ -25,6 +25,10 @@ from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
 from blockchainetl_common.utils import validate_range
 
+from zilliqaetl.mappers.event_log_mapper import map_event_logs
+from zilliqaetl.mappers.exception_mapper import map_exceptions
+from zilliqaetl.mappers.transaction_mapper import map_transaction
+from zilliqaetl.mappers.transition_mapper import map_transitions
 from zilliqaetl.mappers.tx_block_mapper import map_tx_block
 from zilliqaetl.service.zilliqa_service import ZilliqaService
 
@@ -38,7 +42,11 @@ class ExportTxBlocksJob(BaseJob):
             zilliqa_api,
             max_workers,
             item_exporter,
-            batch_size=1):
+            batch_size=1,
+            export_transactions=True,
+            export_event_logs=True,
+            export_exceptions=True,
+            export_transitions=True):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
@@ -47,6 +55,11 @@ class ExportTxBlocksJob(BaseJob):
         self.item_exporter = item_exporter
 
         self.zilliqa_service = ZilliqaService(zilliqa_api)
+
+        self.export_transactions = export_transactions
+        self.export_event_logs = export_event_logs
+        self.export_exceptions = export_exceptions
+        self.export_transitions = export_transitions
 
     def _start(self):
         self.item_exporter.open()
@@ -59,9 +72,31 @@ class ExportTxBlocksJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        blocks = self.zilliqa_service.get_tx_blocks(block_number_batch)
-        for block in blocks:
-            self.item_exporter.export_item(map_tx_block(block))
+        for number in block_number_batch:
+            tx_block = map_tx_block(self.zilliqa_service.get_tx_block(number))
+            self.item_exporter.export_item(tx_block)
+
+            if self._should_export_transactions(tx_block):
+                for txn in self.zilliqa_service.get_transactions(number):
+                    self.item_exporter.export_item(map_transaction(tx_block, txn))
+                    if self._should_export_event_logs(txn):
+                        self.item_exporter.export_items(map_event_logs(tx_block, txn))
+                    if self._should_export_exceptions(txn):
+                        self.item_exporter.export_items(map_exceptions(tx_block, txn))
+                    if self._should_export_transitions(txn):
+                        self.item_exporter.export_items(map_transitions(tx_block, txn))
+
+    def _should_export_transactions(self, tx_block):
+        return self.export_transactions and tx_block.get('num_transactions') > 0
+
+    def _should_export_event_logs(self, txn):
+        return self.export_event_logs and txn.get('receipt')
+
+    def _should_export_exceptions(self, txn):
+        return self.export_exceptions and txn.get('receipt')
+
+    def _should_export_transitions(self, txn):
+        return self.export_transitions and txn.get('receipt')
 
     def _end(self):
         self.batch_work_executor.shutdown()

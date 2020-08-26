@@ -1,0 +1,3 @@
+{"type": "exception", "block_number": 1111, "block_timestamp": "1549034916903239", "transaction_id": "9b00b3b7d80dfb3818a6aaab0cb6fd3822b1bd7b3c6d5c6260579d12ae631a96", "index": 0, "line": 87, "message": "Exception thrown: (Message [(_exception : (String \\\"Error\\\")) ; (code : (Int32 -2))])"}
+{"type": "exception", "block_number": 1111, "block_timestamp": "1549034916903239", "transaction_id": "9b00b3b7d80dfb3818a6aaab0cb6fd3822b1bd7b3c6d5c6260579d12ae631a96", "index": 1, "line": 100, "message": "Raised from IsAdmin"}
+{"type": "exception", "block_number": 1111, "block_timestamp": "1549034916903239", "transaction_id": "9b00b3b7d80dfb3818a6aaab0cb6fd3822b1bd7b3c6d5c6260579d12ae631a96", "index": 2, "line": 137, "message": "Raised from ConfigureUsers"}

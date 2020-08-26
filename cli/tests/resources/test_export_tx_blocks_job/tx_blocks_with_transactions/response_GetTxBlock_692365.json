@@ -1,0 +1,43 @@
+{
+   "id" : "1",
+   "jsonrpc" : "2.0",
+   "result" : {
+      "header" : {
+         "Rewards" : "19734000000000",
+         "DSBlockNum" : "6924",
+         "GasUsed" : "19734",
+         "NumTxns" : 28,
+         "BlockNum" : "692365",
+         "GasLimit" : "500000",
+         "StateRootHash" : "e66dcb5cb733f95d42b17b05fe4cf5c50a2b4c34d73bd7cdfc711adf4ecf7e0e",
+         "MbInfoHash" : "b53b75026977acc47fcf1a16a59695e1dfb4015156f69d2edc16196e0df029fd",
+         "NumMicroBlocks" : 3,
+         "StateDeltaHash" : "71794385e32975738087c5ba20234dee457f9f35bcbdc15cf7f3e80d9c25ba3c",
+         "PrevBlockHash" : "747a5a7b9dd6561af4320d7584b832beb92223f02a9d0f1bae9a152fee311384",
+         "MinerPubKey" : "0x0232DDAF647E6D314073C7652D09609927E0A661525DA1B2BAA4F563F7CCC2D9DB",
+         "Timestamp" : "1595863976488744",
+         "Version" : 1
+      },
+      "body" : {
+         "HeaderSign" : "80993D70D6C8CBDD8087732B941C22E401D3A4AFC8A2E74025FD38B2F52B9726B69ED520585DE889C63247BD6CFA0A42FA86B992DC318CD480A089F777F1E56C",
+         "MicroBlockInfos" : [
+            {
+               "MicroBlockHash" : "e8e4b9e80c6230e829fe39b146ba33b887ba9b2975601d68e4b19af207fb484f",
+               "MicroBlockShardId" : 0,
+               "MicroBlockTxnRootHash" : "522f7aef2d33ca528bfc4f0a26d7c9af8c9cbdfd25fe0d72c47763a3624c168b"
+            },
+            {
+               "MicroBlockShardId" : 1,
+               "MicroBlockHash" : "afea07bd1372d1c2c47e7acbf4c3321b396cb49720da535c7d4ab8ed9fba9c56",
+               "MicroBlockTxnRootHash" : "7000833874d58ac58efbfe8ece417cc08591715d21a9ec192144d0745a4a5229"
+            },
+            {
+               "MicroBlockHash" : "05f25252d70a6f63669e852b11e3371ca282fd1537be6b3bde6a2e8087cafdc4",
+               "MicroBlockShardId" : 2,
+               "MicroBlockTxnRootHash" : "473537211cb491234ca0c8fabf9c6c3597ab5181151bb740df076f04ac16a6af"
+            }
+         ],
+         "BlockHash" : "4141618170d709cbcabc20872d5c89e1bdc8df5b7c646576e5dc2aeea59bfec4"
+      }
+   }
+}
