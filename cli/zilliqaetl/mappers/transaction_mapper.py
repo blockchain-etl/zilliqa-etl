@@ -23,18 +23,36 @@
 from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
 
 
-def map_ds_block(raw_block):
-    header = raw_block.get('header')
+def map_transaction(tx_block, txn):
     block = {
-        'type': 'ds_block',
-        'number': to_int(header.get('BlockNum')),
-        'timestamp': iso_datetime_string(header.get('Timestamp')),
-        'difficulty': to_int(header.get('Difficulty')),
-        'difficulty_ds': to_int(header.get('DifficultyDS')),
-        'gas_price': to_int(header.get('GasPrice')),
-        'ds_leader_pub_key': header.get('LeaderPubKey'),
-        'prev_hash': header.get('PrevHash'),
-        'signature': raw_block.get('signature'),
+        'type': 'transaction',
+        'id': txn.get('ID'),
+        'block_number': tx_block.get('number'),
+        'block_timestamp': tx_block.get('timestamp'),
+        'amount': to_int(txn.get('amount')),
+        'code': txn.get('code'),
+        'data': txn.get('data'),
+        'gas_limit': to_int(txn.get('gasLimit')),
+        'gas_price': to_int(txn.get('gasPrice')),
+        'nonce': to_int(txn.get('nonce')),
+        'sender_pub_key': txn.get('senderPubKey'),
+        'signature': txn.get('signature'),
+        'to_addr': txn.get('toAddr'),
+        'version': to_int(txn.get('version')),
+        **map_receipt(txn)
     }
 
     return block
+
+
+def map_receipt(txn):
+    receipt = txn.get('receipt')
+    if receipt is None:
+        return None
+
+    return {
+        'accepted': receipt.get('accepted'),
+        'success': receipt.get('success'),
+        'cumulative_gas': to_int(receipt.get('cumulative_gas')),
+        'epoch_num': to_int(receipt.get('epoch_num')),
+    }

@@ -20,21 +20,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string
 
 
-def map_ds_block(raw_block):
-    header = raw_block.get('header')
-    block = {
-        'type': 'ds_block',
-        'number': to_int(header.get('BlockNum')),
-        'timestamp': iso_datetime_string(header.get('Timestamp')),
-        'difficulty': to_int(header.get('Difficulty')),
-        'difficulty_ds': to_int(header.get('DifficultyDS')),
-        'gas_price': to_int(header.get('GasPrice')),
-        'ds_leader_pub_key': header.get('LeaderPubKey'),
-        'prev_hash': header.get('PrevHash'),
-        'signature': raw_block.get('signature'),
-    }
-
-    return block
+def map_transitions(tx_block, txn):
+    receipt = txn.get('receipt')
+    if receipt and receipt.get('transitions'):
+        for index, transition in enumerate(receipt.get('transitions')):
+            msg = transition.get('msg')
+            yield {
+                'type': 'transition',
+                'block_number': tx_block.get('number'),
+                'block_timestamp': tx_block.get('timestamp'),
+                'transaction_id': txn.get('ID'),
+                'index': index,
+                'accepted': receipt.get('accepted'),
+                'addr': transition.get('addr'),
+                'depth': transition.get('depth'),
+                'amount': to_int(msg.get('amount')),
+                'recipient': msg.get('_recipient'),
+                'tag': msg.get('_tag'),
+                'params': json_dumps(msg.get('params')),
+            }

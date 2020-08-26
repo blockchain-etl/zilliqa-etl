@@ -26,8 +26,7 @@ class ZilliqaService(object):
         self.zilliqa_api = zilliqa_api
 
     def get_ds_block(self, block_number):
-        block = self.zilliqa_api.GetDsBlock(str(block_number))
-        return block
+        return self.zilliqa_api.GetDsBlock(str(block_number))
 
     def get_ds_blocks(self, block_number_batch):
         if not block_number_batch:
@@ -36,11 +35,13 @@ class ZilliqaService(object):
             yield self.get_ds_block(block_number)
 
     def get_tx_block(self, block_number):
-        block = self.zilliqa_api.GetTxBlock(str(block_number))
-        return block
+        return self.zilliqa_api.GetTxBlock(str(block_number))
 
     def get_tx_blocks(self, block_number_batch):
         if not block_number_batch:
             return []
         for block_number in block_number_batch:
             yield self.get_tx_block(block_number)
+
+    def get_transactions(self, block_number):
+        return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))

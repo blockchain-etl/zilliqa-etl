@@ -38,8 +38,11 @@ def read_resource(resource_group, file_name):
 
 
 @pytest.mark.parametrize("start_block, end_block, resource_group ,provider_type", [
-    (1001, 1003, 'tx_blocks', 'mock'),
-    skip_if_slow_tests_disabled([1001, 1003, 'tx_blocks', 'online']),
+    (1001, 1003, 'tx_blocks_without_transactions', 'mock'),
+    skip_if_slow_tests_disabled([1001, 1003, 'tx_blocks_without_transactions', 'online']),
+    (692365, 692365, 'tx_blocks_with_transactions', 'mock'),
+    skip_if_slow_tests_disabled([692365, 692365, 'tx_blocks_with_transactions', 'online']),
+    (1111, 1111, 'tx_blocks_with_exceptions', 'mock'),
 ])
 def test_export_tx_blocks_job(tmpdir, start_block, end_block, resource_group, provider_type):
     job = ExportTxBlocksJob(
