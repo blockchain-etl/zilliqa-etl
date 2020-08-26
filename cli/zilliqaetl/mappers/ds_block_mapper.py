@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int
+from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
 
 
 def map_ds_block(raw_block):
@@ -28,7 +28,7 @@ def map_ds_block(raw_block):
     block = {
         'type': 'ds_block',
         'number': to_int(header.get('BlockNum')),
-        'timestamp': header.get('Timestamp'),
+        'timestamp': iso_datetime_string(header.get('Timestamp')),
         'difficulty': to_int(header.get('Difficulty')),
         'difficulty_ds': to_int(header.get('DifficultyDS')),
         'gas_price': to_int(header.get('GasPrice')),

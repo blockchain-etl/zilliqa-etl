@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timezone
 
 
 def to_int(val):
@@ -8,6 +9,15 @@ def to_int(val):
         return int(val)
 
     return val
+
+
+def iso_datetime_string(timestamp):
+    if timestamp is None:
+        return None
+    if isinstance(timestamp, str):
+        timestamp = int(timestamp)
+
+    return datetime.utcfromtimestamp(timestamp / 1000000).strftime('%Y-%m-%d %H:%M:%S')
 
 
 def json_dumps(obj):

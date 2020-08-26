@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps
+from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string
 
 
 def map_exceptions(tx_block, txn):
