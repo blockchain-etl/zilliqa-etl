@@ -35,13 +35,12 @@ class ExportDsBlocksJob(BaseJob):
             end_block,
             zilliqa_api,
             max_workers,
-            item_exporter,
-            batch_size=1):
+            item_exporter):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(1, max_workers)
         self.item_exporter = item_exporter
 
         self.zilliqa_service = ZilliqaService(zilliqa_api)
@@ -57,8 +56,8 @@ class ExportDsBlocksJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        blocks = self.zilliqa_service.get_ds_blocks(block_number_batch)
-        for block in blocks:
+        for block_number in block_number_batch:
+            block = self.zilliqa_service.get_ds_block(block_number)
             self.item_exporter.export_item(map_ds_block(block))
 
     def _end(self):

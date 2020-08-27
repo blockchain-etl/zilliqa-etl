@@ -38,12 +38,10 @@ logging_basic_config()
 @click.option('-p', '--provider-uri', default='https://api.zilliqa.com', show_default=True, type=str,
               help='The URI of the remote Zilliqa node.')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
-@click.option('-b', '--batch-size', default=10, show_default=True, type=int,
-              help='The number of blocks to export in batch.')
 @click.option('-o', '--output-dir', default=None, type=str, help='The output directory for block data.')
 @click.option('-f', '--output-format', default='json', show_default=True, type=click.Choice(['json']),
               help='The output format.')
-def export_tx_blocks(start_block, end_block, provider_uri, max_workers, batch_size, output_dir, output_format):
+def export_tx_blocks(start_block, end_block, provider_uri, max_workers, output_dir, output_format):
     """Exports tx blocks."""
 
     job = ExportTxBlocksJob(
@@ -52,6 +50,5 @@ def export_tx_blocks(start_block, end_block, provider_uri, max_workers, batch_si
         zilliqa_api=ThreadLocalProxy(lambda: ZilliqaAPI(provider_uri)),
         max_workers=max_workers,
         item_exporter=ZilliqaItemExporter(output_dir, output_format=output_format),
-        batch_size=batch_size
     )
     job.run()

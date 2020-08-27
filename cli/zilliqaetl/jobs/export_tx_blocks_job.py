@@ -42,7 +42,6 @@ class ExportTxBlocksJob(BaseJob):
             zilliqa_api,
             max_workers,
             item_exporter,
-            batch_size=1,
             export_transactions=True,
             export_event_logs=True,
             export_exceptions=True,
@@ -51,7 +50,7 @@ class ExportTxBlocksJob(BaseJob):
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(1, max_workers)
         self.item_exporter = item_exporter
 
         self.zilliqa_service = ZilliqaService(zilliqa_api)
