@@ -31,7 +31,7 @@ from zilliqaetl.service.ds_block_timestamp_graph import DsBlockTimestampGraph
 
 
 @pytest.mark.parametrize("date,expected_start_block,expected_end_block", [
-    skip_if_slow_tests_disabled(['2019-06-18', 1, 1422]),
+    skip_if_slow_tests_disabled(['2019-06-18', 0, 1422]),
     skip_if_slow_tests_disabled(['2020-08-01', 7004, 7021]),
 ])
 def test_get_ds_block_range_for_date(date, expected_start_block, expected_end_block):

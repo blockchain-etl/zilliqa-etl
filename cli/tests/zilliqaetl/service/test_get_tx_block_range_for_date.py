@@ -31,7 +31,7 @@ from zilliqaetl.service.tx_block_timestamp_graph import TxBlockTimestampGraph
 
 
 @pytest.mark.parametrize("date,expected_start_block,expected_end_block", [
-    skip_if_slow_tests_disabled(['2019-06-18', 1, 142160]),
+    skip_if_slow_tests_disabled(['2019-06-18', 0, 142160]),
     skip_if_slow_tests_disabled(['2020-08-01', 700286, 702099]),
 ])
 def test_get_tx_block_range_for_date(date, expected_start_block, expected_end_block):
