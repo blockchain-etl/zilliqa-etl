@@ -32,6 +32,7 @@ setup(
     install_requires=[
         'blockchain-etl-common==1.3.0',
         'click==7.0',
+        'python-dateutil==2.7.0',
         'pyzil==1.5.22',
     ],
     extras_require={

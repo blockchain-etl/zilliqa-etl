@@ -19,29 +19,37 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import json
+
+from zilliqaetl.service.zilliqa_service import ZilliqaService
+from blockchainetl_common.graph.graph_operations import Point
 
 
-class ZilliqaService(object):
+class TxBlockTimestampGraph(object):
     def __init__(self, zilliqa_api):
-        self.zilliqa_api = zilliqa_api
+        self._zilliqa_service = ZilliqaService(zilliqa_api)
 
-    def get_ds_block(self, block_number):
-        return self.zilliqa_api.GetDsBlock(str(block_number))
+    def get_first_point(self):
+        block = self._zilliqa_service.get_genesis_tx_block()
+        return block_to_point(block)
 
-    def get_genesis_ds_block(self):
-        return self.get_ds_block(0)
+    def get_last_point(self):
+        block = self._zilliqa_service.get_latest_tx_block()
+        return block_to_point(block)
 
-    def get_latest_ds_block(self):
-        return self.zilliqa_api.GetLatestDsBlock()
+    def get_point(self, block_number):
+        block = self._zilliqa_service.get_tx_block(block_number)
+        return block_to_point(block)
 
-    def get_tx_block(self, block_number):
-        return self.zilliqa_api.GetTxBlock(str(block_number))
+    def get_points(self, block_numbers):
+        blocks = [self._zilliqa_service.get_tx_block(block_number) for block_number in block_numbers]
+        return [block_to_point(block) for block in blocks]
 
-    def get_genesis_tx_block(self):
-        return self.get_tx_block(0)
 
-    def get_latest_tx_block(self):
-        return self.zilliqa_api.GetLatestTxBlock()
+def block_to_point(block):
+    header = block.get('header')
+    if not header or not header.get('Timestamp'):
+        raise ValueError('header or header timestamp is empty in block: ' + json.dumps(block))
 
-    def get_transactions(self, block_number):
-        return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
+    block_timestamp_utc = float(header.get('Timestamp')) / 1000000
+    return Point(int(header.get('BlockNum')), block_timestamp_utc)

@@ -24,6 +24,8 @@ import click
 
 from zilliqaetl.cli.export_ds_blocks import export_ds_blocks
 from zilliqaetl.cli.export_tx_blocks import export_tx_blocks
+from zilliqaetl.cli.get_ds_block_range_for_date import get_ds_block_range_for_date
+from zilliqaetl.cli.get_tx_block_range_for_date import get_tx_block_range_for_date
 
 
 @click.group()
@@ -36,3 +38,7 @@ def cli(ctx):
 # export
 cli.add_command(export_ds_blocks, "export_ds_blocks")
 cli.add_command(export_tx_blocks, "export_tx_blocks")
+
+# utils
+cli.add_command(get_ds_block_range_for_date, "get_ds_block_range_for_date")
+cli.add_command(get_tx_block_range_for_date, "get_tx_block_range_for_date")
