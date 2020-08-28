@@ -61,3 +61,39 @@ Options:
   -f, --output-format [json]      The output format.  [default: json]
   -h, --help                      Show this message and exit.
 ```
+
+#### get_ds_block_range_for_date
+
+```bash
+zilliqaetl get_ds_block_range_for_date --provider-uri=https://api.zilliqa.com --date 2020-08-01
+7004,7021
+```
+
+Outputs start and end ds blocks for given date.
+
+```
+Options:
+  -p, --provider-uri TEXT  The URI of the remote Zilliqa API  [default:
+                           https://api.zilliqa.com]
+  -d, --date YYYY-MM-DD    The date e.g. 2020-01-01.  [required]
+  -o, --output TEXT        The output file. If not specified stdout is used.
+  -h, --help               Show this message and exit.
+```
+
+#### get_tx_block_range_for_date
+
+```bash
+zilliqaetl get_tx_block_range_for_date --provider-uri=https://api.zilliqa.com --date 2020-08-01
+700286,702099
+```
+
+Outputs start and end tx blocks for given date.
+
+```
+Options:
+  -p, --provider-uri TEXT  The URI of the remote Zilliqa API  [default:
+                           https://api.zilliqa.com]
+  -d, --date YYYY-MM-DD    The date e.g. 2020-01-01.  [required]
+  -o, --output TEXT        The output file. If not specified stdout is used.
+  -h, --help               Show this message and exit.
+```
