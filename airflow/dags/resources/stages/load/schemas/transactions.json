@@ -1,0 +1,104 @@
+[
+    {
+        "name": "id",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "block_number",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "block_timestamp",
+        "type": "TIMESTAMP",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "amount",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "code",
+        "type": "STRING",
+        "description": "",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "data",
+        "type": "STRING",
+        "description": "",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "gas_limit",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "gas_price",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "gas_price",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "sender_pub_key",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "signature",
+        "type": "BYTES",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "to_addr",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "version",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "nonce": "accepted",
+        "type": "BOOL",
+        "description": "",
+        "mode": "NULLABLE"
+    },
+    {
+        "nonce": "success",
+        "type": "BOOL",
+        "description": "",
+        "mode": "NULLABLE"
+    },
+    {
+        "nonce": "cumulative_gas",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "NULLABLE"
+    },
+    {
+        "nonce": "epoch_num",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "NULLABLE"
+    }
+]

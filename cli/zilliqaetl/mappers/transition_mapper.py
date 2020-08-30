@@ -40,5 +40,5 @@ def map_transitions(tx_block, txn):
                 'amount': to_int(msg.get('amount')),
                 'recipient': msg.get('_recipient'),
                 'tag': msg.get('_tag'),
-                'params': json_dumps(msg.get('params')),
+                'params': [json_dumps(param) for param in msg.get('params')],
             }

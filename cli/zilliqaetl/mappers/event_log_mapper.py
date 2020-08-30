@@ -35,5 +35,5 @@ def map_event_logs(tx_block, txn):
                 'index': index,
                 'address': event_log.get('address'),
                 'event_name': event_log.get('_eventname'),
-                'params': json_dumps(event_log.get('params'))
+                'params': [json_dumps(param) for param in event_log.get('params')]
             }
