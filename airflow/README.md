@@ -51,8 +51,7 @@ to configure email notifications.
 - For a new environment clone Zilliqa ETL Airflow: `git clone https://github.com/blockchain-etl/zilliqa-etl && cd zilliqa-etl/airflow`. 
   For an existing environment use the `airflow_variables.json` file from 
   [Cloud Source Repository](#creating-a-cloud-source-repository-for-airflow-variables) for your environment.
-- Copy `example_airflow_variables.json` to `airflow_variables.json`. 
-  Edit `airflow_variables.json` and update configuration options with your values. 
+- Edit `airflow_variables.json` and update configuration options with your values. 
   You can find variables description in the table below. For the `mainnet_output_bucket` variable 
   specify the bucket created on step 1 above. You can get it by running `echo $BUCKET`.
 - Open Airflow UI. You can get its URL from `airflowUri` configuration option: 
