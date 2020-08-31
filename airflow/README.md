@@ -4,8 +4,6 @@ Airflow DAGs for exporting and loading the Zilliqa blockchain data to Google Big
 
 - [mainnet_export_dag.py](dags/mainnet_export_dag.py) - exports mainnet Zilliqa data to a GCS bucket.
 - [mainnet_load_dag.py](dags/mainnet_load_dag.py) - loads mainnet Zilliqa data from GCS bucket to BigQuery.
-- [mainnet_verify_streaming_dag.py](dags/mainnet_verify_streaming_dag.py) - verifies the consistency and 
-    data latency in mainnet BigQuery tables.
 
 ## Prerequisites
 
