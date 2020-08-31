@@ -199,8 +199,8 @@ def build_load_dag(
 
     verify_ds_blocks_count_task = add_verify_tasks('ds_blocks_count', dependencies=[merge_ds_blocks_task])
     verify_tx_blocks_count_task = add_verify_tasks('tx_blocks_count', dependencies=[merge_tx_blocks_task])
-    # verify_blocks_have_latest_task = add_verify_tasks('blocks_have_latest', dependencies=[merge_blocks_task])
-    # verify_actions_count_task = add_verify_tasks('actions_count', dependencies=[merge_blocks_task, merge_actions_task])
+    verify_transactions_count_task = add_verify_tasks('transactions_count',
+                                                      dependencies=[merge_tx_blocks_task, merge_transactions_task])
 
     if notification_emails and len(notification_emails) > 0:
         send_email_task = EmailOperator(
@@ -212,7 +212,6 @@ def build_load_dag(
         )
         verify_ds_blocks_count_task >> send_email_task
         verify_tx_blocks_count_task >> send_email_task
-        # verify_blocks_have_latest_task >> send_email_task
-        # verify_actions_count_task >> send_email_task
+        verify_transactions_count_task >> send_email_task
 
     return dag
