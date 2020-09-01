@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string, encode_bench32_address
 
 
 def map_transitions(tx_block, txn):
@@ -35,10 +35,10 @@ def map_transitions(tx_block, txn):
                 'transaction_id': txn.get('ID'),
                 'index': index,
                 'accepted': receipt.get('accepted'),
-                'addr': transition.get('addr'),
+                'addr': encode_bench32_address(transition.get('addr')),
                 'depth': transition.get('depth'),
                 'amount': to_int(msg.get('amount')),
-                'recipient': msg.get('_recipient'),
+                'recipient': encode_bench32_address(msg.get('_recipient')),
                 'tag': msg.get('_tag'),
                 'params': [json_dumps(param) for param in msg.get('params')],
             }

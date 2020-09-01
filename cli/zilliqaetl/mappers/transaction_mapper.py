@@ -19,8 +19,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+from pyzil.account import Account
 
-from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string, encode_bench32_pub_key, encode_bench32_address
 
 
 def map_transaction(tx_block, txn):
@@ -36,8 +37,9 @@ def map_transaction(tx_block, txn):
         'gas_price': to_int(txn.get('gasPrice')),
         'nonce': to_int(txn.get('nonce')),
         'sender_pub_key': txn.get('senderPubKey'),
+        'sender': encode_bench32_pub_key(txn.get('senderPubKey')),
         'signature': txn.get('signature'),
-        'to_addr': txn.get('toAddr'),
+        'to_addr': encode_bench32_address(txn.get('toAddr')),
         'version': to_int(txn.get('version')),
         **map_receipt(txn)
     }
