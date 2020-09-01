@@ -8,12 +8,6 @@ from tempfile import TemporaryDirectory
 from airflow import DAG, configuration
 from airflow.operators import python_operator
 
-from zilliqaetl.cli import (
-    get_ds_block_range_for_date,
-    get_tx_block_range_for_date,
-    export_ds_blocks,
-    export_tx_blocks,
-)
 from zilliqaetl_airflow.gcs_utils import upload_to_gcs
 
 
@@ -55,15 +49,33 @@ def build_export_dag(
     from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
     cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
 
+    def import_zilliqaetl():
+        from zilliqaetl.cli import (
+            get_ds_block_range_for_date,
+            get_tx_block_range_for_date,
+            export_ds_blocks,
+            export_tx_blocks,
+        )
+        globals()['get_ds_block_range_for_date'] = get_ds_block_range_for_date
+        globals()['get_tx_block_range_for_date'] = get_tx_block_range_for_date
+        globals()['export_ds_blocks'] = export_ds_blocks
+        globals()['export_tx_blocks'] = export_tx_blocks
+
     # Export
     def export_path(directory, date):
         return "export/{directory}/block_date={block_date}/".format(
             directory=directory, block_date=date.strftime("%Y-%m-%d")
         )
 
-    def copy_to_export_path(file_path, export_path):
+    def copy_to_export_path(file_path, export_path, upload_empty_if_not_exist=True):
         logging.info('Calling copy_to_export_path({}, {})'.format(file_path, export_path))
         filename = os.path.basename(file_path)
+
+        if not os.path.exists(file_path):
+            if upload_empty_if_not_exist:
+                open(file_path, mode='a').close()
+            else:
+                raise ValueError('File {} does not exist'.format(file_path))
 
         upload_to_gcs(
             gcs_hook=cloud_storage_hook,
@@ -96,6 +108,7 @@ def build_export_dag(
         return int(start_block), int(end_block)
 
     def export_ds_blocks_command(execution_date, provider_uri, **kwargs):
+        import_zilliqaetl()
         with TemporaryDirectory() as tempdir:
             start_block, end_block = get_ds_block_range(tempdir, execution_date, provider_uri)
 
@@ -120,6 +133,7 @@ def build_export_dag(
             )
 
     def export_tx_blocks_command(execution_date, provider_uri, **kwargs):
+        import_zilliqaetl()
         with TemporaryDirectory() as tempdir:
             start_block, end_block = get_tx_block_range(tempdir, execution_date, provider_uri)
 
