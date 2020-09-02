@@ -48,5 +48,6 @@ class ZilliqaService(object):
         try:
             return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
         except APIError as e:
-            print(f'Error getting transactions for tx_block#{block_number} caused by "{e}"')
-            return []
+            if str(e) == "TxBlock has no transactions":
+                return []
+            raise e

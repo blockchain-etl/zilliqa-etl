@@ -28,7 +28,7 @@ Airflow DAGs for exporting and loading the Zilliqa blockchain data to Google Big
     ```bash
     ENVIRONMENT_NAME=${PROJECT}-${ENVIRONMENT_INDEX} && echo "Environment name is ${ENVIRONMENT_NAME}"
     gcloud composer environments create ${ENVIRONMENT_NAME} --location=us-central1 --zone=us-central1-a \
-        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.11.3-airflow-1.10.9 \
+        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
         --network=default --subnetwork=default
     
     gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=zilliqa-etl==0.0.2
