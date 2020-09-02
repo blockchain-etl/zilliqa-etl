@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, json_dumps, iso_datetime_string, encode_bench32_address
 
 
 def map_event_logs(tx_block, txn):
@@ -33,7 +33,7 @@ def map_event_logs(tx_block, txn):
                 'block_timestamp': tx_block.get('timestamp'),
                 'transaction_id': txn.get('ID'),
                 'index': index,
-                'address': event_log.get('address'),
+                'address': encode_bench32_address(event_log.get('address')),
                 'event_name': event_log.get('_eventname'),
                 'params': [json_dumps(param) for param in event_log.get('params')]
             }

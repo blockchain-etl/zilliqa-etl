@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+from pyzil.zilliqa.api import APIError
 
 
 class ZilliqaService(object):
@@ -44,4 +45,9 @@ class ZilliqaService(object):
         return self.zilliqa_api.GetLatestTxBlock()
 
     def get_transactions(self, block_number):
-        return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
+        try:
+            return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
+        except APIError as e:
+            if str(e) == "TxBlock has no transactions":
+                return []
+            raise e
