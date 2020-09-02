@@ -80,11 +80,11 @@ class ExportTxBlocksJob(BaseJob):
                 for txn in txns:
                     items.append(map_transaction(tx_block, txn))
                     if self._should_export_event_logs(txn):
-                        items.append(map_event_logs(tx_block, txn))
+                        items.extend(map_event_logs(tx_block, txn))
                     if self._should_export_exceptions(txn):
-                        items.append(map_exceptions(tx_block, txn))
+                        items.extend(map_exceptions(tx_block, txn))
                     if self._should_export_transitions(txn):
-                        items.append(map_transitions(tx_block, txn))
+                        items.extend(map_transitions(tx_block, txn))
             tx_block['num_present_transactions'] = len(txns)
             items.append(tx_block)
 
