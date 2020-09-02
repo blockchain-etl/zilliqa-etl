@@ -75,8 +75,8 @@ class ExportTxBlocksJob(BaseJob):
         for number in block_number_batch:
             tx_block = map_tx_block(self.zilliqa_service.get_tx_block(number))
 
-            txns = list(self.zilliqa_service.get_transactions(number))
-            if self._should_export_transactions(tx_block):
+            txns = list(self.zilliqa_service.get_transactions(number)) if tx_block.get('num_transactions') > 0 else []
+            if self._should_export_transactions():
                 for txn in txns:
                     items.append(map_transaction(tx_block, txn))
                     if self._should_export_event_logs(txn):
@@ -91,8 +91,8 @@ class ExportTxBlocksJob(BaseJob):
         for item in items:
             self.item_exporter.export_item(item)
 
-    def _should_export_transactions(self, tx_block):
-        return self.export_transactions and tx_block.get('num_transactions') > 0
+    def _should_export_transactions(self):
+        return self.export_transactions
 
     def _should_export_event_logs(self, txn):
         return self.export_event_logs and txn.get('receipt')
