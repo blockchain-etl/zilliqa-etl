@@ -60,6 +60,12 @@
         "mode": "REQUIRED"
     },
     {
+        "name": "num_present_transactions",
+        "type": "INTEGER",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
         "name": "prev_block_hash",
         "type": "STRING",
         "description": "",

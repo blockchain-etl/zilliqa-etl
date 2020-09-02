@@ -26,6 +26,7 @@ mb_info_hash: STRING
 tx_leader_pub_key: STRING
 num_micro_blocks: INTEGER
 num_transactions: INTEGER
+num_present_transactions: INTEGER
 prev_block_hash: STRING
 rewards: INTEGER
 state_delta_hash: STRING
