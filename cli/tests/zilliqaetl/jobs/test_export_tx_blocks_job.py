@@ -43,6 +43,7 @@ def read_resource(resource_group, file_name):
     (692365, 692365, 'tx_blocks_with_transactions', 'mock'),
     skip_if_slow_tests_disabled([692365, 692365, 'tx_blocks_with_transactions', 'online']),
     (1111, 1111, 'tx_blocks_with_exceptions', 'mock'),
+    skip_if_slow_tests_disabled([175334, 175334, 'tx_blocks_missing_transactions', 'online']),
 ])
 def test_export_tx_blocks_job(tmpdir, start_block, end_block, resource_group, provider_type):
     job = ExportTxBlocksJob(

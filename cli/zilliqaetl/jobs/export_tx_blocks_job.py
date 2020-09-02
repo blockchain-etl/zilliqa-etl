@@ -71,22 +71,28 @@ class ExportTxBlocksJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
+        items = []
         for number in block_number_batch:
             tx_block = map_tx_block(self.zilliqa_service.get_tx_block(number))
-            self.item_exporter.export_item(tx_block)
 
-            if self._should_export_transactions(tx_block):
-                for txn in self.zilliqa_service.get_transactions(number):
-                    self.item_exporter.export_item(map_transaction(tx_block, txn))
+            txns = list(self.zilliqa_service.get_transactions(number)) if tx_block.get('num_transactions') > 0 else []
+            if self._should_export_transactions():
+                for txn in txns:
+                    items.append(map_transaction(tx_block, txn))
                     if self._should_export_event_logs(txn):
-                        self.item_exporter.export_items(map_event_logs(tx_block, txn))
+                        items.extend(map_event_logs(tx_block, txn))
                     if self._should_export_exceptions(txn):
-                        self.item_exporter.export_items(map_exceptions(tx_block, txn))
+                        items.extend(map_exceptions(tx_block, txn))
                     if self._should_export_transitions(txn):
-                        self.item_exporter.export_items(map_transitions(tx_block, txn))
+                        items.extend(map_transitions(tx_block, txn))
+            tx_block['num_present_transactions'] = len(txns)
+            items.append(tx_block)
 
-    def _should_export_transactions(self, tx_block):
-        return self.export_transactions and tx_block.get('num_transactions') > 0
+        for item in items:
+            self.item_exporter.export_item(item)
+
+    def _should_export_transactions(self):
+        return self.export_transactions
 
     def _should_export_event_logs(self, txn):
         return self.export_event_logs and txn.get('receipt')
