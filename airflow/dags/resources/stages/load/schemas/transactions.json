@@ -54,6 +54,12 @@
         "mode": "REQUIRED"
     },
     {
+        "name": "sender",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
         "name": "signature",
         "type": "BYTES",
         "description": "",
