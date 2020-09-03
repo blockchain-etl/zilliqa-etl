@@ -21,13 +21,13 @@
         "name": "index",
         "type": "INTEGER",
         "description": "",
-        "mode": "NULLABLE"
+        "mode": "REQUIRED"
     },
     {
         "name": "line",
         "type": "STRING",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "message",

@@ -103,7 +103,7 @@ def build_load_dag(
         wait_sensor >> load_operator
         return load_operator
 
-    def add_merge_tasks(task, dependencies=None):
+    def add_merge_tasks(task, time_partitioning_field='timestamp', dependencies=None):
         def merge_task(ds, **kwargs):
             client = bigquery.Client()
 
@@ -143,7 +143,8 @@ def build_load_dag(
                     'destination_dataset_project_id': destination_dataset_project_id,
                     'destination_dataset_name': dataset_name,
                     'dataset_name_temp': dataset_name_temp,
-                    'table_schema': schema
+                    'table_schema': schema,
+                    'time_partitioning_field': time_partitioning_field,
                 }
 
                 merge_sql = kwargs['task'].render_template('', merge_sql_template, merge_template_context)
@@ -185,17 +186,17 @@ def build_load_dag(
 
     load_ds_blocks_task = add_load_tasks('ds_blocks')
     load_tx_blocks_task = add_load_tasks('tx_blocks')
-    load_transactions_task = add_load_tasks('transactions')
-    load_event_logs_task = add_load_tasks('event_logs')
-    load_transitions_task = add_load_tasks('transitions')
-    load_exceptions_task = add_load_tasks('exceptions')
+    load_transactions_task = add_load_tasks('transactions', time_partitioning_field='block_timestamp')
+    load_event_logs_task = add_load_tasks('event_logs', time_partitioning_field='block_timestamp')
+    load_transitions_task = add_load_tasks('transitions', time_partitioning_field='block_timestamp')
+    load_exceptions_task = add_load_tasks('exceptions', time_partitioning_field='block_timestamp')
 
     merge_ds_blocks_task = add_merge_tasks('ds_blocks', dependencies=[load_ds_blocks_task])
     merge_tx_blocks_task = add_merge_tasks('tx_blocks', dependencies=[load_tx_blocks_task])
-    merge_transactions_task = add_merge_tasks('transactions', dependencies=[load_transactions_task])
-    merge_event_logs_task = add_merge_tasks('event_logs', dependencies=[load_event_logs_task])
-    merge_transitions_task = add_merge_tasks('event_logs', dependencies=[load_transitions_task])
-    merge_exceptions_task = add_merge_tasks('exceptions', dependencies=[load_exceptions_task])
+    merge_transactions_task = add_merge_tasks('transactions', time_partitioning_field='block_timestamp', dependencies=[load_transactions_task])
+    merge_event_logs_task = add_merge_tasks('event_logs', time_partitioning_field='block_timestamp', dependencies=[load_event_logs_task])
+    merge_transitions_task = add_merge_tasks('event_logs', time_partitioning_field='block_timestamp', dependencies=[load_transitions_task])
+    merge_exceptions_task = add_merge_tasks('exceptions', time_partitioning_field='block_timestamp', dependencies=[load_exceptions_task])
 
     verify_ds_blocks_count_task = add_verify_tasks('ds_blocks_count', dependencies=[merge_ds_blocks_task])
     verify_tx_blocks_count_task = add_verify_tasks('tx_blocks_count', dependencies=[merge_tx_blocks_task])
