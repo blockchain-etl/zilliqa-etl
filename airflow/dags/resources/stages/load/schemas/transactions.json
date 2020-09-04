@@ -19,7 +19,7 @@
     },
     {
         "name": "amount",
-        "type": "INTEGER",
+        "type": "NUMERIC",
         "description": "",
         "mode": "REQUIRED"
     },
@@ -48,55 +48,55 @@
         "mode": "REQUIRED"
     },
     {
-        "nonce": "gas_price",
-        "type": "INTEGER",
-        "description": "",
-        "mode": "REQUIRED"
-    },
-    {
-        "nonce": "sender_pub_key",
+        "name": "sender_pub_key",
         "type": "STRING",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "signature",
+        "name": "sender",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "signature",
         "type": "BYTES",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "to_addr",
+        "name": "to_addr",
         "type": "STRING",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "version",
+        "name": "version",
         "type": "INTEGER",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "accepted",
+        "name": "accepted",
         "type": "BOOL",
         "description": "",
         "mode": "NULLABLE"
     },
     {
-        "nonce": "success",
+        "name": "success",
         "type": "BOOL",
         "description": "",
         "mode": "NULLABLE"
     },
     {
-        "nonce": "cumulative_gas",
+        "name": "cumulative_gas",
         "type": "INTEGER",
         "description": "",
         "mode": "NULLABLE"
     },
     {
-        "nonce": "epoch_num",
+        "name": "epoch_num",
         "type": "INTEGER",
         "description": "",
         "mode": "NULLABLE"

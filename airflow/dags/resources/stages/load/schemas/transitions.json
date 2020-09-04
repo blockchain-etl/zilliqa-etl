@@ -43,7 +43,7 @@
     },
     {
         "nonce": "amount",
-        "type": "INTEGER",
+        "type": "NUMERIC",
         "description": "",
         "mode": "REQUIRED"
     },
