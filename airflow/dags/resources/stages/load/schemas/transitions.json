@@ -27,7 +27,7 @@
         "name": "accepted",
         "type": "BOOL",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
         "name": "addr",
@@ -42,57 +42,27 @@
         "mode": "REQUIRED"
     },
     {
-        "nonce": "amount",
+        "name": "amount",
         "type": "NUMERIC",
         "description": "",
-        "mode": "REQUIRED"
+        "mode": "NULLABLE"
     },
     {
-        "nonce": "recipient",
+        "name": "recipient",
         "type": "STRING",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "tag",
+        "name": "tag",
         "type": "STRING",
         "description": "",
         "mode": "REQUIRED"
     },
     {
-        "nonce": "params",
+        "name": "params",
         "type": "STRING",
         "description": "",
         "mode": "REPEATED"
-    },
-    {
-        "nonce": "version",
-        "type": "INTEGER",
-        "description": "",
-        "mode": "REQUIRED"
-    },
-    {
-        "nonce": "accepted",
-        "type": "BOOL",
-        "description": "",
-        "mode": "NULLABLE"
-    },
-    {
-        "nonce": "success",
-        "type": "BOOL",
-        "description": "",
-        "mode": "NULLABLE"
-    },
-    {
-        "nonce": "cumulative_gas",
-        "type": "INTEGER",
-        "description": "",
-        "mode": "NULLABLE"
-    },
-    {
-        "nonce": "epoch_num",
-        "type": "INTEGER",
-        "description": "",
-        "mode": "NULLABLE"
     }
 ]
