@@ -195,7 +195,7 @@ def build_load_dag(
     merge_tx_blocks_task = add_merge_tasks('tx_blocks', dependencies=[load_tx_blocks_task])
     merge_transactions_task = add_merge_tasks('transactions', time_partitioning_field='block_timestamp', dependencies=[load_transactions_task])
     merge_event_logs_task = add_merge_tasks('event_logs', time_partitioning_field='block_timestamp', dependencies=[load_event_logs_task])
-    merge_transitions_task = add_merge_tasks('event_logs', time_partitioning_field='block_timestamp', dependencies=[load_transitions_task])
+    merge_transitions_task = add_merge_tasks('transitions', time_partitioning_field='block_timestamp', dependencies=[load_transitions_task])
     merge_exceptions_task = add_merge_tasks('exceptions', time_partitioning_field='block_timestamp', dependencies=[load_exceptions_task])
 
     verify_ds_blocks_count_task = add_verify_tasks('ds_blocks_count', dependencies=[merge_ds_blocks_task])
