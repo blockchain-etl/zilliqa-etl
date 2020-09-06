@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string, encode_bench32_pub_key
 
 
 def map_ds_block(raw_block):
@@ -33,6 +33,7 @@ def map_ds_block(raw_block):
         'difficulty_ds': to_int(header.get('DifficultyDS')),
         'gas_price': to_int(header.get('GasPrice')),
         'ds_leader_pub_key': header.get('LeaderPubKey'),
+        'ds_leader_address': encode_bench32_pub_key(header.get('LeaderPubKey')),
         'prev_hash': header.get('PrevHash'),
         'signature': raw_block.get('signature'),
     }

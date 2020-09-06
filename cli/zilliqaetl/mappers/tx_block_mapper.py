@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string
+from zilliqaetl.utils.zilliqa_utils import to_int, iso_datetime_string, encode_bench32_pub_key
 
 
 def map_tx_block(raw_block):
@@ -36,6 +36,7 @@ def map_tx_block(raw_block):
         'gas_used': to_int(header.get('GasUsed')),
         'mb_info_hash': header.get('MbInfoHash'),
         'tx_leader_pub_key': header.get('MinerPubKey'),
+        'tx_leader_address': encode_bench32_pub_key(header.get('MinerPubKey')),
         'num_micro_blocks': to_int(header.get('NumMicroBlocks')),
         'num_transactions': to_int(header.get('NumTxns')),
         'prev_block_hash': header.get('PrevBlockHash'),

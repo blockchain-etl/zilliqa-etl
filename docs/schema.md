@@ -8,6 +8,7 @@ difficulty: INTEGER
 difficulty_ds: INTEGER
 gas_price: NUMERIC
 ds_leader_pub_key: STRING
+ds_leader_address: STRING
 prev_hash: STRING
 signature: STRING
 ```
@@ -24,6 +25,7 @@ gas_limit: NUMERIC
 gas_used: NUMERIC
 mb_info_hash: STRING
 tx_leader_pub_key: STRING
+tx_leader_address: STRING
 num_micro_blocks: INTEGER
 num_transactions: INTEGER
 num_present_transactions: INTEGER
