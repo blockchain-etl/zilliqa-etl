@@ -48,6 +48,12 @@
         "mode": "REQUIRED"
     },
     {
+        "name": "tx_leader_address",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
         "name": "num_micro_blocks",
         "type": "INTEGER",
         "description": "",

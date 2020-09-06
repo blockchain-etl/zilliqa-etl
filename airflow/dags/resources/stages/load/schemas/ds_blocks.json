@@ -36,6 +36,12 @@
         "mode": "REQUIRED"
     },
     {
+        "name": "ds_leader_address",
+        "type": "STRING",
+        "description": "",
+        "mode": "REQUIRED"
+    },
+    {
         "name": "prev_hash",
         "type": "STRING",
         "description": "",
