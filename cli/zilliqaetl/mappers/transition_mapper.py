@@ -37,7 +37,7 @@ def map_transitions(tx_block, txn):
                 'accepted': receipt.get('accepted'),
                 'addr': encode_bench32_address(transition.get('addr')),
                 'depth': transition.get('depth'),
-                'amount': to_int(msg.get('amount')),
+                'amount': to_int(msg.get('_amount')),
                 'recipient': encode_bench32_address(msg.get('_recipient')),
                 'tag': msg.get('_tag'),
                 'params': [json_dumps(param) for param in msg.get('params')],
