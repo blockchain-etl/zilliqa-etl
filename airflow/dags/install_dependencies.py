@@ -23,7 +23,7 @@ dag = DAG(
 # https://github.com/AntonKueltz/fastecdsa/issues/29
 t1 = BashOperator(
     task_id='apt_install',
-    bash_command='sudo apt update && sudo apt -y install python-dev libgmp3-dev && sudo pip3 install zilliqa-etl==1.0.2',
+    bash_command='sudo apt update && sudo apt -y install python-dev libgmp3-dev && sudo pip3 install zilliqa-etl==1.0.3',
     dag=dag,
     depends_on_past=False)
 
