@@ -33,6 +33,6 @@ def map_exceptions(tx_block, txn):
                 'block_timestamp': tx_block.get('timestamp'),
                 'transaction_id': txn.get('ID'),
                 'index': index,
-                'line': receipt.get('line'),
+                'line': exception.get('line'),
                 'message': exception.get('message'),
             }

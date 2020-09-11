@@ -1,48 +1,38 @@
 {
-   "result" : {
-      "body" : {
-         "MicroBlockInfos" : [
-            {
-               "MicroBlockShardId" : 0,
-               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000",
-               "MicroBlockHash" : "41af0cd10219cc90b8e610d4ca527c904db7248d4f8a17e4e21ec465322a6824"
-            },
-            {
-               "MicroBlockShardId" : 1,
-               "MicroBlockHash" : "818fae238ea680f1f0ee47ffec9e681ccc835d41047dafa7773ab4bfc25e314b",
-               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000"
-            },
-            {
-               "MicroBlockShardId" : 2,
-               "MicroBlockHash" : "dce0bfd6de99ad7b26913ad53abe9b3fa3838f0ea564ccdcb16af712cbb1939e",
-               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000"
-            },
-            {
-               "MicroBlockTxnRootHash" : "0000000000000000000000000000000000000000000000000000000000000000",
-               "MicroBlockHash" : "f895ffa1b341a7b9423c1a249f45e02424a6453b2767aca1f543f0ae9dcbbe4e",
-               "MicroBlockShardId" : 3
-            }
-         ],
-         "HeaderSign" : "AAF5CB92CD975A5ADDB3AD0C3985211E43FDC903180B6F9B033ECEBF71E22602BE9FC59EE201D0E6E6258F5CACD6FF1DFE45F05688714EB1CFD8898DE3996E60",
-         "BlockHash" : "b30a59afc06746d7ea379a8b0ce7d2c79c435a0df771932d1223efe86013ab35"
-      },
-      "header" : {
-         "Rewards" : "0",
-         "MbInfoHash" : "e8026438fcb2739727dfac92b4d99a95a84bd18956b7a3a700671b5615c8fe5d",
-         "StateDeltaHash" : "0000000000000000000000000000000000000000000000000000000000000000",
-         "GasLimit" : "2000000",
-         "MinerPubKey" : "0x02741E6AC672B5EF3F347618D900D4762E3A4CE51B324F5A23C6996F31E67F7DD4",
-         "GasUsed" : "0",
-         "PrevBlockHash" : "5c13781c78da39f42158832d8b3e6c2a7fc20c9b20004891eef4bd558085e6cb",
-         "NumMicroBlocks" : 4,
-         "StateRootHash" : "1f9fcb7750547764edb69cb662b1a31c5425ac961aac7e358ca0d77ab15d5a64",
-         "DSBlockNum" : "12",
-         "Version" : 1,
-         "BlockNum" : "1111",
-         "Timestamp" : "1549034916903239",
-         "NumTxns" : 0
-      }
-   },
-   "jsonrpc" : "2.0",
-   "id" : "1"
+    "id": "1",
+    "jsonrpc": "2.0",
+    "result": {
+        "body": {
+            "BlockHash": "0af40c647bbaa2b82782cd5ae7bf10410e9ff1f86ec1200e00cba3193c7eae6a",
+            "HeaderSign": "01453E57C64FE39A49DDB3F57DD4C0942282F6002C47EA618EF62B3901AF0AC54322AF995915B731507A2CD4EF2D90E14F5ADE1AC67E38F22943B4AE29E0D18D",
+            "MicroBlockInfos": [
+                {
+                    "MicroBlockHash": "709557aeb26a78a01b23f2f7bd5877dc87a59591a57a2755269866bef3939df7",
+                    "MicroBlockShardId": 0,
+                    "MicroBlockTxnRootHash": "c17ce397e98b0dafae19285e344df9d9492de6cf092f3b9331fdde36ffe00a71"
+                },
+                {
+                    "MicroBlockHash": "e9a358c386cc630d9ac313cb107c27091ef51327501cdbaa11fe4c817b7ffe1a",
+                    "MicroBlockShardId": 1,
+                    "MicroBlockTxnRootHash": "fe413d42aab5234fa3ee58e8398837d35410c8c100a2ad7380d23d0fc74b6403"
+                }
+            ]
+        },
+        "header": {
+            "BlockNum": "549481",
+            "DSBlockNum": "5495",
+            "GasLimit": "175000",
+            "GasUsed": "479",
+            "MbInfoHash": "303eb6b2e9fe40f736862837421fa5b2ff8f1175cfd29248c70439909da2ade9",
+            "MinerPubKey": "0x021C03378FD496346FC297453FFB795CAEED687ED9EA34985FDFA9ABF5C6A7AE25",
+            "NumMicroBlocks": 2,
+            "NumTxns": 2,
+            "PrevBlockHash": "171216c54bc01ecdf7a3c5b757d06ed60fe5bd6a544f6d6c8ad02dc53d3fe5ba",
+            "Rewards": "479000000000",
+            "StateDeltaHash": "da3511d40442ed2edcd5471e640a382461943aaf55bcb4e971ce50316e65b0ff",
+            "StateRootHash": "d8da6fdf3e739862ee92634c605b4d5d46f5fa6a120a8fbe23ecca23e0fb520e",
+            "Timestamp": "1588667803906804",
+            "Version": 1
+        }
+    }
 }
