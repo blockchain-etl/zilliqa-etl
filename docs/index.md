@@ -2,7 +2,7 @@
 
 Zilliqa ETL CLI lets you convert Zilliqa blockchain data to JSON newline-delimited files.
 
-Data is available for you to query right away in [Google BigQuery](https://console.cloud.google.com/bigquery).
+Data is available for you to query right away in [Google BigQuery](https://console.cloud.google.com/bigquery?page=dataset&d=crypto_zilliqa&p=public-data-finance).
 
 ## Features
 
