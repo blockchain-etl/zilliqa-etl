@@ -26,6 +26,7 @@ def read_export_dag_vars(var_prefix, **kwargs):
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         'export_max_active_runs': export_max_active_runs,
         'export_max_workers': int(read_var('export_max_workers', var_prefix, True, **kwargs)),
+        'gzip': parse_bool(read_var('gzip', var_prefix, False, **kwargs), False),
     }
 
     return vars
@@ -39,6 +40,7 @@ def read_load_dag_vars(var_prefix, **kwargs):
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
         'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),
+        'gzip': parse_bool(read_var('gzip', var_prefix, False, **kwargs), False),
     }
 
     load_end_date = read_var('load_end_date', var_prefix, False, **kwargs)
