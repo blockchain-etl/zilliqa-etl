@@ -29,7 +29,8 @@ def build_load_dag(
         load_start_date=datetime(2018, 6, 30),
         load_end_date=None,
         load_schedule_interval='0 0 * * *',
-        load_all_partitions=None
+        load_all_partitions=None,
+        gzip=False
 ):
     """Build Load DAG"""
 
@@ -67,12 +68,16 @@ def build_load_dag(
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
     def add_load_tasks(task, time_partitioning_field='timestamp'):
+        file_type = 'json'
+        if gzip:
+            file_type = 'gz'
+
         wait_sensor = GoogleCloudStorageObjectSensor(
             task_id='wait_latest_{task}'.format(task=task),
             timeout=60 * 60,
             poke_interval=60,
             bucket=output_bucket,
-            object='export/{task}/block_date={datestamp}/{task}.json'.format(task=task, datestamp='{{ds}}'),
+            object='export/{task}/block_date={datestamp}/{task}.{file_type}'.format(task=task, datestamp='{{ds}}', file_type=file_type),
             dag=dag
         )
 
@@ -87,7 +92,7 @@ def build_load_dag(
             job_config.time_partitioning = TimePartitioning(field=time_partitioning_field)
 
             export_location_uri = 'gs://{bucket}/export'.format(bucket=output_bucket)
-            uri = '{export_location_uri}/{task}/*.json'.format(export_location_uri=export_location_uri, task=task)
+            uri = '{export_location_uri}/{task}/*.{file_type}'.format(export_location_uri=export_location_uri, task=task, file_type=file_type)
             table_ref = create_dataset(client, dataset_name_temp).table(task)
             load_job = client.load_table_from_uri(uri, table_ref, job_config=job_config)
             submit_bigquery_job(load_job, job_config)

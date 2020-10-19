@@ -4,6 +4,7 @@ import os
 import logging
 from datetime import timedelta
 from tempfile import TemporaryDirectory
+from pathlib import Path
 
 from airflow import DAG, configuration
 from airflow.operators import python_operator
@@ -21,6 +22,7 @@ def build_export_dag(
         export_schedule_interval='0 0 * * *',
         export_max_workers=5,
         export_max_active_runs=None,
+        gzip=False,
 ):
     """Build Export DAG"""
     default_dag_args = {
@@ -70,6 +72,8 @@ def build_export_dag(
     def copy_to_export_path(file_path, export_path, upload_empty_if_not_exist=True):
         logging.info('Calling copy_to_export_path({}, {})'.format(file_path, export_path))
         filename = os.path.basename(file_path)
+        if gzip:
+            filename = Path(file_path).stem + '.gz'
 
         if not os.path.exists(file_path):
             if upload_empty_if_not_exist:
@@ -81,7 +85,8 @@ def build_export_dag(
             gcs_hook=cloud_storage_hook,
             bucket=output_bucket,
             object=export_path + filename,
-            filename=file_path)
+            filename=file_path,
+            gzip=gzip)
 
     def get_ds_block_range(tempdir, date, provider_uri):
         logging.info('Calling get_ds_block_range_for_date({}, {}, ...)'.format(provider_uri, date))

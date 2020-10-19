@@ -1,10 +1,12 @@
 import logging
 import os
+import shutil
+import gzip as gz
 
 MEGABYTE = 1024 * 1024
 
 
-def upload_to_gcs(gcs_hook, bucket, object, filename, mime_type='application/octet-stream'):
+def upload_to_gcs(gcs_hook, bucket, object, filename, gzip=False, mime_type='application/octet-stream'):
     """Upload a file to GCS. Helps avoid OverflowError:
     https://stackoverflow.com/questions/47610283/cant-upload-2gb-to-google-cloud-storage,
     https://developers.google.com/api-client-library/python/guide/media_upload#resumable-media-chunked-upload
@@ -13,6 +15,14 @@ def upload_to_gcs(gcs_hook, bucket, object, filename, mime_type='application/oct
     from googleapiclient import errors
 
     service = gcs_hook.get_conn()
+
+    if gzip:
+        filename_gz = filename + '.gz'
+
+        with open(filename, 'rb') as f_in:
+            with gz.open(filename_gz, 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
+                filename = filename_gz
 
     if os.path.getsize(filename) > 10 * MEGABYTE:
         media = MediaFileUpload(filename, mime_type, resumable=True)
