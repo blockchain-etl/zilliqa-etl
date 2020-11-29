@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2020 Worawat Wijarn worawat.wijarn@gmail.com
+# Copyright (c) 2020 Evgeny Medvedev, evge.medvedev@gmail.com
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +20,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import click
-
-from zilliqaetl.cli.export_ds_blocks import export_ds_blocks
-from zilliqaetl.cli.export_tx_blocks import export_tx_blocks
-from zilliqaetl.cli.get_ds_block_range_for_date import get_ds_block_range_for_date
-from zilliqaetl.cli.get_tx_block_range_for_date import get_tx_block_range_for_date
+import logging
+import threading
+import time
 
 
-@click.group()
-@click.version_option(version='1.0.4')
-@click.pass_context
-def cli(ctx):
-    pass
+class RateLimitingProxy:
+    def __init__(self, delegate, max_per_second=5):
+        self._lock = threading.Lock()
+        self._delegate = delegate
+        self._min_interval = 1.0 / max_per_second
+        self._last_time_called = time.perf_counter()
+        self._wait_buffer = 0.001
 
+    def __getattr__(self, name):
+        self._lock.acquire()
+        try:
+            elapsed = time.perf_counter() - self._last_time_called
+            left_to_wait = self._min_interval - elapsed + self._wait_buffer
+            if left_to_wait > 0:
+                logging.debug(f'Waiting {left_to_wait} seconds because of rate limiting')
+                time.sleep(left_to_wait)
 
-# export
-cli.add_command(export_ds_blocks, "export_ds_blocks")
-cli.add_command(export_tx_blocks, "export_tx_blocks")
-
-# utils
-cli.add_command(get_ds_block_range_for_date, "get_ds_block_range_for_date")
-cli.add_command(get_tx_block_range_for_date, "get_tx_block_range_for_date")
+            return getattr(self._delegate, name)
+        finally:
+            self._last_time_called = time.perf_counter()
+            self._lock.release()
