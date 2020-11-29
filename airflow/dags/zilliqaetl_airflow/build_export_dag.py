@@ -151,7 +151,8 @@ def build_export_dag(
                 provider_uri=provider_uri,
                 max_workers=export_max_workers,
                 output_dir=tempdir,
-                output_format='json'
+                output_format='json',
+                rate_limit=3
             )
 
             copy_to_export_path(
