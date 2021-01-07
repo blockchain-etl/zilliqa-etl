@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from zilliqaetl.jobs.retriable_exceptions import RETRY_EXCEPTIONS
 from zilliqaetl.mappers.ds_block_mapper import map_ds_block
 from blockchainetl_common.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
@@ -40,7 +40,7 @@ class ExportDsBlocksJob(BaseJob):
         self.start_block = start_block
         self.end_block = end_block
 
-        self.batch_work_executor = BatchWorkExecutor(1, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(1, max_workers, retry_exceptions=RETRY_EXCEPTIONS)
         self.item_exporter = item_exporter
 
         self.zilliqa_service = ZilliqaService(zilliqa_api)
