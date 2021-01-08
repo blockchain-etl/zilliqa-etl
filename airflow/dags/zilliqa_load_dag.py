@@ -10,10 +10,10 @@ logging.getLogger().setLevel(logging.DEBUG)
 
 # airflow DAG
 DAG = build_load_dag(
-    dag_id='mainnet_load_dag',
+    dag_id='zilliqa_load_dag',
     chain='zilliqa',
     **read_load_dag_vars(
-        var_prefix='mainnet_',
+        var_prefix='zilliqa_',
         load_schedule_interval='0 2 * * *'
     )
 )

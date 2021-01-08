@@ -13,7 +13,7 @@ default_args = {
 }
 
 dag = DAG(
-    'install_dependencies',
+    'zilliqa_install_dependencies',
     default_args=default_args,
     schedule_interval='*/5 * * * *',
     catchup=False,

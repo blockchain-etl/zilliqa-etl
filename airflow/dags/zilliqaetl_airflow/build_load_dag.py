@@ -84,7 +84,7 @@ def build_load_dag(
         def load_task():
             client = bigquery.Client()
             job_config = bigquery.LoadJobConfig()
-            schema_path = os.path.join(dags_folder, 'resources/stages/load/schemas/{task}.json'.format(task=task))
+            schema_path = os.path.join(dags_folder, 'zilliqa_resources/stages/load/schemas/{task}.json'.format(task=task))
             job_config.schema = read_bigquery_schema_from_file(schema_path)
             job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
             job_config.write_disposition = 'WRITE_TRUNCATE'
@@ -136,10 +136,10 @@ def build_load_dag(
                 merge_job_config.priority = bigquery.QueryPriority.INTERACTIVE
 
                 merge_sql_path = os.path.join(
-                    dags_folder, 'resources/stages/load/sqls/merge.sql'.format(task=task))
+                    dags_folder, 'zilliqa_resources/stages/load/sqls/merge.sql'.format(task=task))
                 merge_sql_template = read_file(merge_sql_path)
 
-                schema_path = os.path.join(dags_folder, 'resources/stages/load/schemas/{task}.json'.format(task=task))
+                schema_path = os.path.join(dags_folder, 'zilliqa_resources/stages/load/schemas/{task}.json'.format(task=task))
                 schema = read_bigquery_schema_from_file(schema_path)
 
                 merge_template_context = {
@@ -176,7 +176,7 @@ def build_load_dag(
         # The queries in verify/sqls will fail when the condition is not met
         # Have to use this trick since the Python 2 version of BigQueryCheckOperator doesn't support standard SQL
         # and legacy SQL can't be used to query partitioned tables.
-        sql_path = os.path.join(dags_folder, 'resources/stages/verify/sqls/{task}.sql'.format(task=task))
+        sql_path = os.path.join(dags_folder, 'zilliqa_resources/stages/verify/sqls/{task}.sql'.format(task=task))
         sql = read_file(sql_path)
         verify_task = BigQueryOperator(
             task_id='verify_{task}'.format(task=task),
