@@ -8,7 +8,7 @@ from airflow.operators.python_operator import PythonOperator
 
 default_args = {
     'start_date': '2020-01-01',
-    'retries': 1,
+    'retries': 5,
     'retry_delay': timedelta(minutes=5)
 }
 
