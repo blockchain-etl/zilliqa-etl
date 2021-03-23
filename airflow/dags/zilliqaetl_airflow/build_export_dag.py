@@ -31,7 +31,7 @@ def build_export_dag(
         "end_date": export_end_date,
         "email_on_failure": True,
         "email_on_retry": False,
-        "retries": 5,
+        "retries": 10,
         "retry_delay": timedelta(minutes=5)
     }
 
