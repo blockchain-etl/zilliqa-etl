@@ -29,7 +29,7 @@ from zilliqaetl.cli.get_tx_block_range_for_date import get_tx_block_range_for_da
 
 
 @click.group()
-@click.version_option(version='1.0.5')
+@click.version_option(version='1.0.6')
 @click.pass_context
 def cli(ctx):
     pass
