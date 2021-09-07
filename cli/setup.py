@@ -34,6 +34,7 @@ setup(
         'click==7.0',
         'python-dateutil==2.7.0',
         'pyzil==1.5.22',
+        'jsonrpcclient==3.3.6'
     ],
     extras_require={
         'dev': [
