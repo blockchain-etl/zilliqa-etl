@@ -208,16 +208,4 @@ def build_load_dag(
     verify_transactions_count_task = add_verify_tasks('transactions_count',
                                                       dependencies=[merge_tx_blocks_task, merge_transactions_task])
 
-    if notification_emails and len(notification_emails) > 0:
-        send_email_task = EmailOperator(
-            task_id='send_email',
-            to=[email.strip() for email in notification_emails.split(',')],
-            subject='Zilliqa ETL Airflow Load DAG Succeeded',
-            html_content='Zilliqa ETL Airflow Load DAG Succeeded - {}'.format(chain),
-            dag=dag
-        )
-        verify_ds_blocks_count_task >> send_email_task
-        verify_tx_blocks_count_task >> send_email_task
-        verify_transactions_count_task >> send_email_task
-
     return dag
