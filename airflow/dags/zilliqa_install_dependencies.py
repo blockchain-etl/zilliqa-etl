@@ -23,7 +23,7 @@ dag = DAG(
 # https://github.com/AntonKueltz/fastecdsa/issues/29
 t1 = BashOperator(
     task_id='apt_install',
-    bash_command='curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo -i apt-key add - && sudo apt update && sudo apt -y install python-dev libgmp3-dev && sudo pip3 install zilliqa-etl==1.0.6',
+    bash_command='curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo -i apt-key add - && sudo apt update && sudo apt -y install python-dev libgmp3-dev && sudo pip3 install zilliqa-etl==1.0.7',
     dag=dag,
     depends_on_past=False)
 

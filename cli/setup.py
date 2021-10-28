@@ -11,7 +11,7 @@ long_description = read('README.md') if os.path.isfile("README.md") else ""
 
 setup(
     name='zilliqa-etl',
-    version='1.0.6',
+    version='1.0.7',
     author='Evgeny Medvedev',
     author_email='evge.medvedev@gmail.com',
     description='Tools for exporting Zilliqa blockchain data to JSON',
@@ -31,8 +31,8 @@ setup(
     python_requires='>=3.6.0,<3.8.0',
     install_requires=[
         'blockchain-etl-common==1.3.0',
-        'click==7.0',
-        'python-dateutil==2.7.0',
+        'click==7.1.2',
+        'python-dateutil==2.8.0',
         'pyzil==1.5.22',
         'jsonrpcclient==3.3.6'
     ],
