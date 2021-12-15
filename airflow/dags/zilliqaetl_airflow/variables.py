@@ -1,6 +1,5 @@
+import os
 from datetime import datetime
-
-from airflow.models import Variable
 
 
 def read_export_dag_vars(var_prefix, **kwargs):
@@ -52,9 +51,10 @@ def read_load_dag_vars(var_prefix, **kwargs):
 
 
 def read_var(var_name, var_prefix=None, required=False, **kwargs):
-    """Read Airflow variable"""
+    """Read envvar (upper-case) with fallback"""
     full_var_name = f'{var_prefix}{var_name}' if var_prefix is not None else var_name
-    var = Variable.get(full_var_name, '')
+    full_var_name_upper = full_var_name.upper()
+    var = os.environ.get(full_var_name_upper, '')
     var = var if var != '' else None
     if var is None:
         var = kwargs.get(var_name)
