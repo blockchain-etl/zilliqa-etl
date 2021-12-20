@@ -52,9 +52,9 @@ class ZilliqaService(object):
         try:
             return self.zilliqa_api.GetTxnBodiesForTxBlock(str(block_number))
         except APIError as e:
-            if str(e) in (TXN_HASH_NOT_PRESENT, FAILED_TO_GET_MICROBLOCK):
+            if str(e) == TXN_HASH_NOT_PRESENT:
                 return self.get_validated_transactions(block_number)
-            if str(e) == TX_BLOCK_NO_TRANSACTIONS:
+            if str(e) in (TX_BLOCK_NO_TRANSACTIONS, FAILED_TO_GET_MICROBLOCK):
                 return []
             raise e
 
@@ -65,7 +65,7 @@ class ZilliqaService(object):
                     try:
                         yield self.get_transaction_by_hash(txn_hash)
                     except APIError as e:
-                        if str(e) not in (TXN_HASH_NOT_PRESENT, FAILED_TO_GET_MICROBLOCK):
+                        if str(e) != TXN_HASH_NOT_PRESENT:
                             raise e
 
     def get_transaction_by_hash(self, txn_hash):
